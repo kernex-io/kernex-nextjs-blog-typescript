@@ -1,5 +1,5 @@
 {
-  "name": "nextjs-blog-javascript",
+  "name": "nextjs-blog-typescript",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -10,15 +10,14 @@
   },
   "dependencies": {
     "@kernex/client": "^1.0.1",
+    "@types/node": "18.14.2",
+    "@types/react": "18.0.28",
+    "@types/react-dom": "18.0.11",
     "eslint": "8.35.0",
     "eslint-config-next": "13.2.1",
     "next": "13.2.1",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
-  },
-  "devDependencies": {
-    "@types/node": "20.8.3",
-    "@types/react": "18.2.25",
-    "typescript": "5.2.2"
+    "react-dom": "18.2.0",
+    "typescript": "4.9.5"
   }
 }

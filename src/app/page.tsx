@@ -1,9 +1,13 @@
+import kernex, {BlogPost, Category} from '@/kernex';
 import BlogPostCard from '@/components/BlogPostCard';
 import BlogPostListContainer from '@/components/BlogPostListContainer';
-import kernex from '@/kernex';
 
-async function getData() {
-  const response = await kernex.resource('blog-posts').find({
+type BlogPostData = Pick<BlogPost, 'title' | 'thumbnail' | 'createdAt' | '_id' | 'slug'> & {
+  categories: Category[];
+}
+
+async function getData(): Promise<BlogPostData[]> {
+  const response = await kernex.resource('blog-posts').find<BlogPostData>({
     $limit: 10,
     $sort: {
       createdAt: -1,
@@ -18,7 +22,7 @@ async function getData() {
     $select: ['title', 'thumbnail', 'createdAt', '_id', 'slug', 'categories'],
   });
 
-  return response.data;
+  return response.data as BlogPostData[];
 }
 
 export default async function Home() {

@@ -1,9 +1,13 @@
-import kernex from '@/kernex';
+import kernex, {BlogPost, Category} from '@/kernex';
 import styles from './styles.module.css';
 import CategoryTag from '@/components/CategoryTag';
 
-async function getPost(slug) {
-  const response = await kernex.resource('blog-posts').find({
+interface BlogPostData extends Pick<BlogPost, 'title' | 'slug' | 'content' | 'thumbnail'> {
+  categories: Category[];
+}
+
+async function getPost(slug: string): Promise<BlogPostData> {
+  const response = await kernex.resource('blog-posts').find<BlogPostData>({
     $limit: 1,
     slug,
     $join: [
@@ -19,7 +23,7 @@ async function getPost(slug) {
   return response.data[0];
 }
 
-export default async function Page({ params: { slug }}) {
+export default async function Page({ params: { slug } }: { params: { slug: string } }) {
   const post = await getPost(slug);
   return (
     <div className={styles.container}>

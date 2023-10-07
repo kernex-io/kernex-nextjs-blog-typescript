@@ -1,18 +1,22 @@
-import kernex from '@/kernex';
+import kernex, {BlogPost, Category} from '@/kernex';
 import styles from './styles.module.css';
 import BlogPostCard from '@/components/BlogPostCard';
 import BlogPostListContainer from '@/components/BlogPostListContainer';
 
-async function getData(slug) {
+interface BlogPostData extends Pick<BlogPost, 'title' | 'slug' | 'content' | 'thumbnail' | '_id' | 'createdAt'> {
+  categories: Category[];
+}
+
+async function getData(slug: string): Promise<[Category | null, BlogPostData[]]> {
   const response = await kernex.resource('categories').find({
     $limit: 1,
     slug,
   });
 
   const [category] = response.data;
-  let posts = [];
+  let posts: BlogPostData[] = [];
   if (category) {
-    const postsResponse = await kernex.resource('blog-posts').find({
+    const postsResponse = await kernex.resource('blog-posts').find<BlogPostData>({
       $limit: 10,
       // @ts-ignore
       categories: category?._id,
@@ -32,7 +36,7 @@ async function getData(slug) {
   return [category, posts];
 }
 
-export default async function Page({ params: { slug } }) {
+export default async function Page({ params: { slug } }: { params: { slug: string } }) {
   const [category, posts] = await getData(slug);
 
   if (!category) {

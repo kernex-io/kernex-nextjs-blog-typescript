@@ -1,7 +1,10 @@
+import {Category} from '@/kernex';
 import styles from './styles.module.css';
 import Link from 'next/link';
 
-export default function CategoryTag(props) {
+interface CategoryTagProps extends Pick<Category, 'name' | 'slug'> {}
+
+export default function CategoryTag(props: CategoryTagProps) {
   const { name, slug } = props;
 
   return (

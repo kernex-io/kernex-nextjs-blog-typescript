@@ -1,8 +1,13 @@
 import styles from './styles.module.css';
+import {BlogPost, Category} from '@/kernex';
 import Link from 'next/link';
 import CategoryTag from '@/components/CategoryTag';
 
-export default function BlogPostCard(props) {
+interface BlogPostCardProps extends Pick<BlogPost, 'title' | 'thumbnail' | 'slug' | 'createdAt'> {
+  categories: Pick<Category, 'slug' | 'name' | '_id'>[];
+}
+
+export default function BlogPostCard(props: BlogPostCardProps) {
   const { title, thumbnail, slug, createdAt, categories } = props;
 
   return (
