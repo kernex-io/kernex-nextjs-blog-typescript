@@ -1,0 +1,43 @@
+.container {
+    display: flex;
+}
+
+.blogPostContainer {
+    flex: 4;
+}
+
+.sidebarContainer {
+    flex: 1;
+    margin-left: 2rem;
+}
+
+.sidebarTitle {
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.categoriesContainer {
+    display: flex;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.thumbnail {
+    width: 100%;
+    object-fit: cover;
+    height: 400px;
+    border-radius: 10px;
+}
+
+.title {
+    margin-top: 1rem;
+}
+
+.content {
+    color: rgb(50, 50, 50);
+    margin-top: 1rem;
+    white-space: pre-wrap;
+    text-align: justify;
+    line-height: 1.4;
+}
